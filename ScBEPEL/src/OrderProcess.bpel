@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="OrderProcess"
+    targetNamespace="http://enterprise.netbeans.org/bpel/ScBEPEL/OrderProcess"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/ScBEPEL/OrderProcess"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
+    <import namespace="http://enterprise.netbeans.org/bpel/productWrapper" location="productWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product" location="product.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/bepelWarehouseServiceWSDLWrapper" location="bepelWarehouseServiceWSDLWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://service.soen487/" location="bepelWarehouseServiceWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/bepelManufacturerServiceWSDLWrapper" location="bepelManufacturerServiceWSDLWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://service.soen487/" location="bepelManufacturerServiceWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="WarehouseProvider" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelWarehouseServiceWSDLWrapper" partnerLinkType="tns:bepelWarehouseServiceLinkType" partnerRole="bepelWarehouseServiceRole"/>
+        <partnerLink name="WarehouseServiceProvider2" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelWarehouseServiceWSDLWrapper" partnerLinkType="tns:bepelWarehouseServiceLinkType2" partnerRole="bepelWarehouseServiceRole"/>
+        <partnerLink name="WarehouseServiceProvider3" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelWarehouseServiceWSDLWrapper" partnerLinkType="tns:bepelWarehouseServiceLinkType3" partnerRole="bepelWarehouseServiceRole"/>
+        <partnerLink name="ManufacturerServiceProvider" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelManufacturerServiceWSDLWrapper" partnerLinkType="tns:bepelManufacturerServiceLinkType" partnerRole="bepelManufacturerServiceRole"/>
+        <partnerLink name="ManufacturerServiceProvider2" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelManufacturerServiceWSDLWrapper" partnerLinkType="tns:bepelManufacturerServiceLinkType2" partnerRole="bepelManufacturerServiceRole"/>
+        <partnerLink name="ManufacturerServiceProvider3" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelManufacturerServiceWSDLWrapper" partnerLinkType="tns:bepelManufacturerServiceLinkType3" partnerRole="bepelManufacturerServiceRole"/>
+        <partnerLink name="ProductRequestor" xmlns:tns="http://enterprise.netbeans.org/bpel/productWrapper" partnerLinkType="tns:productLinkType" myRole="productRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="ProcessPurchaseOrdersOut3" xmlns:tns="http://service.soen487/" messageType="tns:processPurchaseOrdersResponse"/>
+        <variable name="ProcessPurchaseOrdersIn3" xmlns:tns="http://service.soen487/" messageType="tns:processPurchaseOrders"/>
+        <variable name="ProcessPurchaseOrdersOut2" xmlns:tns="http://service.soen487/" messageType="tns:processPurchaseOrdersResponse"/>
+        <variable name="ProcessPurchaseOrdersIn2" xmlns:tns="http://service.soen487/" messageType="tns:processPurchaseOrders"/>
+        <variable name="ProcessPurchaseOrdersOut" xmlns:tns="http://service.soen487/" messageType="tns:processPurchaseOrdersResponse"/>
+        <variable name="ProcessPurchaseOrdersIn" xmlns:tns="http://service.soen487/" messageType="tns:processPurchaseOrders"/>
+        <variable name="ShipGoodOut3" xmlns:tns="http://service.soen487/" messageType="tns:shipGoodResponse"/>
+        <variable name="ShipGoodIn3" xmlns:tns="http://service.soen487/" messageType="tns:shipGood"/>
+        <variable name="ShipGoodOut2" xmlns:tns="http://service.soen487/" messageType="tns:shipGoodResponse"/>
+        <variable name="ShipGoodIn2" xmlns:tns="http://service.soen487/" messageType="tns:shipGood"/>
+        <variable name="productStatus" xmlns:tns="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product" messageType="tns:productOperationResponse"/>
+        <variable name="ShipGoodOut" xmlns:tns="http://service.soen487/" messageType="tns:shipGoodResponse"/>
+        <variable name="ShipGoodIn" xmlns:tns="http://service.soen487/" messageType="tns:shipGood"/>
+        <variable name="ProductInfo" xmlns:tns="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product" messageType="tns:productOperationRequest"/>
+    </variables>
+    <sequence>
+        <receive name="RecievceProductionInformation" createInstance="yes" partnerLink="ProductRequestor" operation="productOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product" portType="tns:productPortType" variable="ProductInfo"/>
+        <assign name="Assign1">
+            <copy>
+                <from variable="ProductInfo" part="productType"/>
+                <to>$ShipGoodIn.parameters/productType</to>
+            </copy>
+            <copy>
+                <from variable="ProductInfo" part="quantity"/>
+                <to>$ShipGoodIn.parameters/quantity</to>
+            </copy>
+            <copy>
+                <from>1</from>
+                <to>$ShipGoodIn.parameters/warehouseId</to>
+            </copy>
+        </assign>
+        <invoke name="WarehouseInvoker" partnerLink="WarehouseProvider" operation="shipGood" xmlns:tns="http://service.soen487/" portType="tns:bepelWarehouseService" inputVariable="ShipGoodIn" outputVariable="ShipGoodOut"/>
+        <if name="If1">
+            <condition>$ShipGoodOut.parameters/return</condition>
+            <assign name="Assign5">
+                <copy>
+                    <from>$ShipGoodOut.parameters/return</from>
+                    <to variable="productStatus" part="productStatus"/>
+                </copy>
+            </assign>
+            <else>
+                <sequence name="Sequence2">
+                    <assign name="Assign3">
+                        <copy>
+                                <from variable="ProductInfo" part="productType"/>
+                                    <to>$ShipGoodIn2.parameters/productType</to>
+                            </copy>
+                            <copy>
+                                <from variable="ProductInfo" part="quantity"/>
+                                    <to>$ShipGoodIn2.parameters/quantity</to>
+                            </copy>
+                            <copy>
+                                <from>2</from>
+                                    <to>$ShipGoodIn2.parameters/warehouseId</to>
+                            </copy>
+                    </assign>
+                    <invoke name="WarehouseInvoker2" partnerLink="WarehouseServiceProvider2" operation="shipGood" xmlns:tns="http://service.soen487/" portType="tns:bepelWarehouseService" inputVariable="ShipGoodIn2" outputVariable="ShipGoodOut2"/>
+                    <assign name="Assign4">
+                        <copy>
+                                <from>$ShipGoodOut2.parameters/return</from>
+                                    <to variable="productStatus" part="productStatus"/>
+                            </copy>
+                    </assign>
+                    <if name="If2">
+                        <condition>$ShipGoodOut2.parameters/return</condition>
+                        <assign name="Assign8">
+                            <copy>
+                                <from>$ShipGoodOut2.parameters/return</from>
+                                <to variable="productStatus" part="productStatus"/>
+                            </copy>
+                        </assign>
+                        <else>
+                            <sequence name="Sequence3">
+                                <assign name="Assign6">
+                                    <copy>
+                                        <from variable="ProductInfo" part="quantity"/>
+                                        <to>$ShipGoodIn3.parameters/quantity</to>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ProductInfo" part="productType"/>
+                                        <to>$ShipGoodIn3.parameters/productType</to>
+                                    </copy>
+                                    <copy>
+                                        <from>3</from>
+                                        <to>$ShipGoodIn3.parameters/warehouseId</to>
+                                    </copy>
+                                </assign>
+                                <invoke name="WarehouseInvoker3" partnerLink="WarehouseServiceProvider3" operation="shipGood" xmlns:tns="http://service.soen487/" portType="tns:bepelWarehouseService" inputVariable="ShipGoodIn3" outputVariable="ShipGoodOut3"/>
+                                <assign name="Assign7">
+                                    <copy>
+                                        <from>$ShipGoodOut3.parameters/return</from>
+                                        <to variable="productStatus" part="productStatus"/>
+                                    </copy>
+                                </assign>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </else>
+        </if>
+        <reply name="productStatus" partnerLink="ProductRequestor" operation="productOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product" portType="tns:productPortType" variable="productStatus"/>
+        <assign name="Assign9">
+            <copy>
+                <from variable="ProductInfo" part="productType"/>
+                <to>$ProcessPurchaseOrdersIn.parameters/productType</to>
+            </copy>
+            <copy>
+                <from variable="ProductInfo" part="quantity"/>
+                <to>$ProcessPurchaseOrdersIn.parameters/quantity</to>
+            </copy>
+            <copy>
+                <from>1</from>
+                <to>$ProcessPurchaseOrdersIn.parameters/warehouseId</to>
+            </copy>
+            <copy>
+                <from variable="ProductInfo" part="quantity"/>
+                <to>$ProcessPurchaseOrdersIn2.parameters/quantity</to>
+            </copy>
+            <copy>
+                <from variable="ProductInfo" part="productType"/>
+                <to>$ProcessPurchaseOrdersIn2.parameters/productType</to>
+            </copy>
+            <copy>
+                <from>2</from>
+                <to>$ProcessPurchaseOrdersIn2.parameters/warehouseId</to>
+            </copy>
+            <copy>
+                <from variable="ProductInfo" part="quantity"/>
+                <to>$ProcessPurchaseOrdersIn3.parameters/quantity</to>
+            </copy>
+            <copy>
+                <from variable="ProductInfo" part="productType"/>
+                <to>$ProcessPurchaseOrdersIn3.parameters/productType</to>
+            </copy>
+            <copy>
+                <from>3</from>
+                <to>$ProcessPurchaseOrdersIn3.parameters/warehouseId</to>
+            </copy>
+        </assign>
+        <invoke name="ManufacturerInvoker" partnerLink="ManufacturerServiceProvider" operation="processPurchaseOrders" xmlns:tns="http://service.soen487/" portType="tns:bepelManufacturerService" inputVariable="ProcessPurchaseOrdersIn" outputVariable="ProcessPurchaseOrdersOut"/>
+        <assign name="Assign12">
+            <copy>
+                <from>$ProcessPurchaseOrdersOut3.parameters/return</from>
+                <to variable="productStatus" part="productStatus"/>
+            </copy>
+        </assign>
+        <invoke name="ManufactuererInvoker2" partnerLink="ManufacturerServiceProvider2" operation="processPurchaseOrders" xmlns:tns="http://service.soen487/" portType="tns:bepelManufacturerService" inputVariable="ProcessPurchaseOrdersIn2" outputVariable="ProcessPurchaseOrdersOut2"/>
+        <assign name="Assign11">
+            <copy>
+                <from>$ProcessPurchaseOrdersOut2.parameters/return</from>
+                <to variable="productStatus" part="productStatus"/>
+            </copy>
+        </assign>
+        <invoke name="ManufacturerInvoker3" partnerLink="ManufacturerServiceProvider3" operation="processPurchaseOrders" xmlns:tns="http://service.soen487/" portType="tns:bepelManufacturerService" inputVariable="ProcessPurchaseOrdersIn3" outputVariable="ProcessPurchaseOrdersOut3"/>
+        <assign name="Assign10">
+            <copy>
+                <from>$ProcessPurchaseOrdersOut.parameters/return</from>
+                <to variable="productStatus" part="productStatus"/>
+            </copy>
+        </assign>
+    </sequence>
+</process>

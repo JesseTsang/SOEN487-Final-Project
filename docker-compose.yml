@@ -1,0 +1,7 @@
+version: '2'
+services:
+    glassfish:
+        build: C:\Users\Moh\GlassFish_Server\glassfish
+        ports:
+            - "8080:8080"
+            - "4848:4848"

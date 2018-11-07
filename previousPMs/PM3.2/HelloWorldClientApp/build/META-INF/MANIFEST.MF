@@ -1,0 +1,4 @@
+Bundle-Name: HelloWorldClientApp
+Bundle-SymbolicName: HelloWorldClientApp
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0

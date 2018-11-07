@@ -1,0 +1,43 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.soen487/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://service.soen487/" name="bepelWarehouseService">
+<types>
+<xsd:schema>
+<xsd:import namespace="http://service.soen487/" schemaLocation="http://localhost:8080/soen487-w18-team07/bepelWarehouseService?xsd=1"/>
+</xsd:schema>
+</types>
+<message name="shipGood">
+<part name="parameters" element="tns:shipGood"/>
+</message>
+<message name="shipGoodResponse">
+<part name="parameters" element="tns:shipGoodResponse"/>
+</message>
+<message name="Exception">
+<part name="fault" element="tns:Exception"/>
+</message>
+<portType name="bepelWarehouseService">
+<operation name="shipGood">
+<input wsam:Action="http://service.soen487/bepelWarehouseService/shipGoodRequest" message="tns:shipGood"/>
+<output wsam:Action="http://service.soen487/bepelWarehouseService/shipGoodResponse" message="tns:shipGoodResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://service.soen487/bepelWarehouseService/shipGood/Fault/Exception"/>
+</operation>
+</portType>
+<binding name="bepelWarehouseServicePortBinding" type="tns:bepelWarehouseService">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="shipGood">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
+</operation>
+</binding>
+<service name="bepelWarehouseService">
+<port name="bepelWarehouseServicePort" binding="tns:bepelWarehouseServicePortBinding">
+<soap:address location="http://localhost:8080/soen487-w18-team07/bepelWarehouseService"/>
+</port>
+</service>
+</definitions>

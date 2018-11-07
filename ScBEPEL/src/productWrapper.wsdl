@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="productWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/productWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/productWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product">
+    <import location="product.wsdl" namespace="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product"/>
+    <plnk:partnerLinkType name="productLinkType">
+        <plnk:role name="productRole" portType="ns:productPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

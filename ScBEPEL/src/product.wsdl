@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="product" targetNamespace="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product">
+    <types/>
+    <message name="productOperationRequest">
+        <part name="productType" type="xsd:string"/>
+        <part name="quantity" type="xsd:int"/>
+    </message>
+    <message name="productOperationResponse">
+<!--        <part name="productType" type="xsd:string"/>
+        <part name="quantity" type="xsd:int"/>-->
+        <part name="productStatus" type="xsd:boolean"/>
+    </message>
+    <portType name="productPortType">
+        <operation name="productOperation">
+            <input name="input1" message="tns:productOperationRequest"/>
+            <output name="output1" message="tns:productOperationResponse"/>
+        </operation>
+    </portType>
+</definitions>

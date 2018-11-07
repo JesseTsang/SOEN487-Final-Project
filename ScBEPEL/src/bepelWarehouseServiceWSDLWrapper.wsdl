@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="bepelWarehouseServiceWSDLWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/bepelWarehouseServiceWSDLWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/bepelWarehouseServiceWSDLWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://service.soen487/">
+    <import location="bepelWarehouseServiceWSDL.wsdl" namespace="http://service.soen487/"/>
+    <plnk:partnerLinkType name="bepelWarehouseServiceLinkType">
+        <plnk:role name="bepelWarehouseServiceRole" portType="ns:bepelWarehouseService"/>
+    </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="bepelWarehouseServiceLinkType2">
+        <plnk:role name="bepelWarehouseServiceRole" portType="ns:bepelWarehouseService"/>
+    </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="bepelWarehouseServiceLinkType3">
+        <plnk:role name="bepelWarehouseServiceRole" portType="ns:bepelWarehouseService"/>
+    </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="bepelWarehouseServiceLinkType4">
+        <plnk:role name="bepelWarehouseServiceRole" portType="ns:bepelWarehouseService"/>
+    </plnk:partnerLinkType>
+</definitions>

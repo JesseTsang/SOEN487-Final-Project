@@ -1,0 +1,7 @@
+1) Follow DB setup instructions
+2) In services, connect to your DB and start your "Glass-fish server"
+3) Open Project "RestfulWarehouseApp"
+4) Clean and Build "RestfulWarehouseApp" -> then Run
+5) To run the java client, run file "Driver.java"
+
+Note: please test the application with data coming from your initialized DB tables.

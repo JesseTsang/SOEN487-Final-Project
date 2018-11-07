@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WeatherRequestorWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/WeatherRequestorWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/WeatherRequestorWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor">
+    <import location="WeatherRequestor.wsdl" namespace="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor"/>
+    <plnk:partnerLinkType name="WeatherRequestorLinkType">
+        <plnk:role name="WeatherRequestorRole" portType="ns:WeatherRequestorPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

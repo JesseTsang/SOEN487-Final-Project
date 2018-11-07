@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="WeatherRequestor" targetNamespace="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor">
+    <types/>
+    <message name="WeatherRequestorOperationRequest">
+        <part name="cityID" type="xsd:string"/>
+    </message>
+    <message name="WeatherRequestorOperationResponse">
+        <part name="weatherInfo" type="xsd:string"/>
+    </message>
+    <portType name="WeatherRequestorPortType">
+        <operation name="WeatherRequestorOperation">
+            <input name="input1" message="tns:WeatherRequestorOperationRequest"/>
+            <output name="output1" message="tns:WeatherRequestorOperationResponse"/>
+        </operation>
+    </portType>
+</definitions>

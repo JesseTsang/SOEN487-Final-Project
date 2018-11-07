@@ -1,0 +1,99 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Retailer Webservice</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
+        <script src='RestClient.js'></script>
+            
+               
+    <script language="javascript" type="text/javascript">
+            var request = null;
+        function createRequest() {
+                try {
+            request = new XMLHttpRequest();
+                } catch (trymicrosoft) {
+            try {
+            request = new ActiveXObject("MsXML2.XMLHTTP");
+            } catch (othermicrosoft) {
+            try {
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (failed) {
+            request = null;
+            }
+            }
+            }
+
+            if (request == null)
+            alert("Error creating request object!");
+        }
+        
+        function defaultWarehouseOutput()
+        {
+            createRequest();
+            var warehouseID = 1;
+            id=eval(warehouseID);
+            var url = "http://localhost:8080/RetailerWebService/webresources/retailer.entity.retailer/warehouses/" + id + "/products";
+            request.onreadystatechange = handleResponse;
+            request.open("GET", url, true);
+            request.send(null);
+        }
+        
+        function getWarehouseProducts()
+        {
+            createRequest();
+            var warehouseID = document.getElementById("warehouseID").value;
+            id=eval(warehouseID);
+            var url = "http://localhost:8080/RetailerWebService/webresources/retailer.entity.retailer/warehouses/" + id + "/products";
+            request.onreadystatechange = handleResponse;
+            request.open("GET", url, true);
+            request.send(null);
+        }
+        
+        
+        function getProductByID()
+        {
+            createRequest();
+            var productid = document.getElementById("productID").value;
+            id=eval(productid);
+            var url = "http://localhost:8080/RetailerWebService/webresources/retailer.entity.retailer/retailer/products/" + id;
+            request.onreadystatechange = handleResponse;
+            request.open("GET", url, true);
+            request.send(null);
+        }
+        
+        function handleResponse() {
+            if (request.readyState==4 && request.status==200)
+            { 
+                inputFields();    
+                document.write("\n" + request.responseText.toString() + "\n");
+                
+            }                       
+      
+        }
+        
+        function inputFields()
+        {
+            document.body.innerHTML = "";
+            document.writeln("<label>Warehouse ID:</label>");
+            document.writeln("<input type='text' id='warehouseID' size='10'/>");
+            document.writeln("<input type='button' value='Show Products' onclick='getWarehouseProducts()'/>");
+            document.writeln("<br><br/><label>Product ID:</label>");
+            document.writeln("<input type='text' id='productID' size='10'/>");
+            document.writeln("<input type='button' value='Show Retail Product' onclick='getProductByID()'/><br><br/>");
+        }
+        
+    window.onload = defaultWarehouseOutput;
+    </script>
+    </head>
+    <body>
+        <script>inputFields();</script>
+    </body>
+</html>

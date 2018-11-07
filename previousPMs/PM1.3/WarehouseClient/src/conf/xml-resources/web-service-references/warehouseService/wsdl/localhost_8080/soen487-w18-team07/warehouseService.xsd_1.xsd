@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://service.soen487/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.soen487/">
+
+<xs:element name="Exception" type="tns:Exception"/>
+
+<xs:element name="JAXBException" type="tns:JAXBException"/>
+
+<xs:element name="customer" type="tns:customer"/>
+
+<xs:element name="inventory" type="tns:inventory"/>
+
+<xs:element name="inventoryManufacturer" type="tns:inventoryManufacturer"/>
+
+<xs:element name="inventoryManufacturerResponse" type="tns:inventoryManufacturerResponse"/>
+
+<xs:element name="item" type="tns:item"/>
+
+<xs:element name="loadInventory" type="tns:loadInventory"/>
+
+<xs:element name="loadInventoryResponse" type="tns:loadInventoryResponse"/>
+
+<xs:element name="replenish" type="tns:replenish"/>
+
+<xs:element name="replenishResponse" type="tns:replenishResponse"/>
+
+<xs:element name="ship" type="tns:ship"/>
+
+<xs:element name="shipGoods" type="tns:shipGoods"/>
+
+<xs:element name="shipGoodsResponse" type="tns:shipGoodsResponse"/>
+
+<xs:element name="shipResponse" type="tns:shipResponse"/>
+
+<xs:complexType name="loadInventory">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadInventoryResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="JAXBException">
+<xs:sequence>
+<xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+<xs:element name="linkedException" type="tns:throwable" minOccurs="0"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="throwable">
+<xs:sequence>
+<xs:element name="stackTrace" type="tns:stackTraceElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="stackTraceElement" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="inventoryManufacturer">
+<xs:sequence>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inventoryManufacturerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:inventory" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inventory">
+<xs:sequence>
+<xs:element name="item" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="manufacturerName" type="xs:string" minOccurs="0"/>
+<xs:element name="productType" type="xs:string" minOccurs="0"/>
+<xs:element name="unitPrice" type="xs:float"/>
+<xs:element name="quantity" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="item">
+<xs:sequence>
+<xs:element name="manufacturerName" type="xs:string" minOccurs="0"/>
+<xs:element name="productType" type="xs:string" minOccurs="0"/>
+<xs:element name="unitPrice" type="xs:float"/>
+<xs:element name="quantity" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="replenish">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="replenishResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="shipGoods">
+<xs:sequence>
+<xs:element name="itemList" type="tns:itemList" minOccurs="0"/>
+<xs:element name="info" type="tns:customer" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemList">
+<xs:sequence>
+<xs:element name="itemList" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="customer">
+<xs:sequence>
+<xs:element name="customerReferenceNumber" type="xs:int"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="street1" type="xs:string" minOccurs="0"/>
+<xs:element name="street2" type="xs:string" minOccurs="0"/>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="state" type="xs:string" minOccurs="0"/>
+<xs:element name="zip" type="xs:string" minOccurs="0"/>
+<xs:element name="country" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="shipGoodsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:itemShippingStatusList" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemShippingStatusList">
+<xs:sequence>
+<xs:element name="shippedItemList" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="notshippedItemList" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="shippingStatusList">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:itemList"/>
+<xs:element name="value" minOccurs="0" type="tns:customer"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ship">
+<xs:sequence>
+<xs:element name="arg0" type="tns:customer" minOccurs="0"/>
+<xs:element name="arg1" type="tns:itemList" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="shipResponse">
+<xs:sequence/>
+</xs:complexType>
+</xs:schema>

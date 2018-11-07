@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="ScApplication" xmlns:ns2="http://j2ee.netbeans.org/wsdl/ScBEPEL/src/product" xmlns:ns3="http://service.soen487/" xmlns:ns4="http://enterprise.netbeans.org/bpel/ScBEPEL/OrderProcess" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="casaPort1" interface-name="ns2:productPortType" name="endpoint1" service-name="ns1:ScApplicationService1"/>
+        <endpoint endpoint-name="bepelWarehouseServicePort" interface-name="ns3:bepelWarehouseService" name="endpoint2" service-name="ns3:bepelWarehouseService"/>
+        <endpoint endpoint-name="bepelManufacturerServicePort" interface-name="ns3:bepelManufacturerService" name="endpoint3" service-name="ns3:bepelManufacturerService"/>
+        <endpoint display-name="ProductRequestor" endpoint-name="productRole_myRole" file-path="OrderProcess.bpel" interface-name="ns2:productPortType" name="endpoint4" process-name="OrderProcess" service-name="ns4:ProductRequestor"/>
+        <endpoint display-name="WarehouseProvider" endpoint-name="bepelWarehouseServiceRole_partnerRole" file-path="OrderProcess.bpel" interface-name="ns3:bepelWarehouseService" name="endpoint5" process-name="OrderProcess" service-name="ns4:WarehouseProvider"/>
+        <endpoint display-name="WarehouseServiceProvider2" endpoint-name="bepelWarehouseServiceRole_partnerRole" file-path="OrderProcess.bpel" interface-name="ns3:bepelWarehouseService" name="endpoint6" process-name="OrderProcess" service-name="ns4:WarehouseServiceProvider2"/>
+        <endpoint display-name="WarehouseServiceProvider3" endpoint-name="bepelWarehouseServiceRole_partnerRole" file-path="OrderProcess.bpel" interface-name="ns3:bepelWarehouseService" name="endpoint7" process-name="OrderProcess" service-name="ns4:WarehouseServiceProvider3"/>
+        <endpoint display-name="ManufacturerServiceProvider" endpoint-name="bepelManufacturerServiceRole_partnerRole" file-path="OrderProcess.bpel" interface-name="ns3:bepelManufacturerService" name="endpoint8" process-name="OrderProcess" service-name="ns4:ManufacturerServiceProvider"/>
+        <endpoint display-name="ManufacturerServiceProvider2" endpoint-name="bepelManufacturerServiceRole_partnerRole" file-path="OrderProcess.bpel" interface-name="ns3:bepelManufacturerService" name="endpoint9" process-name="OrderProcess" service-name="ns4:ManufacturerServiceProvider2"/>
+        <endpoint display-name="ManufacturerServiceProvider3" endpoint-name="bepelManufacturerServiceRole_partnerRole" file-path="OrderProcess.bpel" interface-name="ns3:bepelManufacturerService" name="endpoint10" process-name="OrderProcess" service-name="ns4:ManufacturerServiceProvider3"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="ScBEPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="ScApplication-ScBEPEL" unit-name="ScBEPEL" unknown="false" x="138" y="99">
+            <provides endpoint="endpoint4"/>
+            <consumes endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
+            <consumes endpoint="endpoint7"/>
+            <consumes endpoint="endpoint8"/>
+            <consumes endpoint="endpoint9"/>
+            <consumes endpoint="endpoint10"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="ScApplication-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port bindingType="soap" x="68" y="187">
+                    <link xlink:href="../jbiasa/ScApplication.wsdl#xpointer(/definitions/service[@name='ScApplicationService1']/port[@name='casaPort1'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+                <port x="68" y="113">
+                    <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelWarehouseServiceWSDL.wsdl#xpointer(/definitions/service[@name='bepelWarehouseService']/port[@name='bepelWarehouseServicePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+                <port x="68" y="39">
+                    <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelManufacturerServiceWSDL.wsdl#xpointer(/definitions/service[@name='bepelManufacturerService']/port[@name='bepelManufacturerServicePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint5" provider="endpoint2" state="unchanged"/>
+        <connection consumer="endpoint6" provider="endpoint2" state="unchanged"/>
+        <connection consumer="endpoint7" provider="endpoint2" state="unchanged"/>
+        <connection consumer="endpoint8" provider="endpoint3" state="unchanged"/>
+        <connection consumer="endpoint9" provider="endpoint3" state="unchanged"/>
+        <connection consumer="endpoint10" provider="endpoint3" state="unchanged"/>
+        <connection consumer="endpoint1" provider="endpoint4" state="new"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiasa/ScApplication.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScApplication.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelWarehouseServiceWSDL.wsdl#xpointer(/definitions/portType[@name='bepelWarehouseService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelManufacturerServiceWSDL.wsdl#xpointer(/definitions/portType[@name='bepelManufacturerService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/product.wsdl#xpointer(/definitions/portType[@name='productPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiasa/ScApplication.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScApplication.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelWarehouseServiceWSDL.wsdl#xpointer(/definitions/binding[@name='bepelWarehouseServicePortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelManufacturerServiceWSDL.wsdl#xpointer(/definitions/binding[@name='bepelManufacturerServicePortBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiasa/ScApplication.wsdl#xpointer(/definitions/service[@name='ScApplicationService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScApplication.wsdl#xpointer(/definitions/service[@name='ScApplicationService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelWarehouseServiceWSDL.wsdl#xpointer(/definitions/service[@name='bepelWarehouseService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/ScBEPEL/bepelManufacturerServiceWSDL.wsdl#xpointer(/definitions/service[@name='bepelManufacturerService'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>

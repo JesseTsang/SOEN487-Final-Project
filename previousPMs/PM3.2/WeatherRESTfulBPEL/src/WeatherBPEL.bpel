@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="WeatherBPEL"
+    targetNamespace="http://enterprise.netbeans.org/bpel/WeatherRESTfulBPEL/WeatherBPEL"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/WeatherRESTfulBPEL/WeatherBPEL"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxnmp="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/NMProperty">
+    <import namespace="http://enterprise.netbeans.org/bpel/WeatherRequestorWrapper" location="WeatherRequestorWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor" location="WeatherRequestor.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherServiceProvider" location="WeatherServiceProvider.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="ServiceProviderLink" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherServiceProvider" partnerLinkType="tns:RestOutboundWSDL" partnerRole="RestOutboundPortTypeRole"/>
+        <partnerLink name="RequestorLink" xmlns:tns="http://enterprise.netbeans.org/bpel/WeatherRequestorWrapper" partnerLinkType="tns:WeatherRequestorLinkType" myRole="WeatherRequestorRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="GetWeatherInfoOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherServiceProvider" messageType="tns:GetWeatherInfoResponse"/>
+        <variable name="GetWeatherInfoIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherServiceProvider" messageType="tns:GetWeatherInfoRequest"/>
+        <variable name="WeatherRequestorOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor" messageType="tns:WeatherRequestorOperationResponse"/>
+        <variable name="WeatherRequestorOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor" messageType="tns:WeatherRequestorOperationRequest"/>
+    </variables>
+    <sequence>
+        <receive name="Receive1" createInstance="yes" partnerLink="RequestorLink" operation="WeatherRequestorOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor" portType="tns:WeatherRequestorPortType" variable="WeatherRequestorOperationIn"/>
+        <assign name="Assign1">
+            <copy>
+                <from>concat('http://api.openweathermap.org/data/2.5/forecast?id=', $WeatherRequestorOperationIn.cityID, '&amp;APPID=9c3b20a4154023aef9f248416fa0639a')</from>
+                <to variable="GetWeatherInfoIn" sxnmp:nmProperty="org.glassfish.openesb.rest.url"/>
+            </copy>
+            <copy>
+                <from>''</from>
+                <to variable="GetWeatherInfoIn" part="part1"/>
+            </copy>
+        </assign>
+        <invoke name="Invoke1" partnerLink="ServiceProviderLink" operation="GetWeatherInfo" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherServiceProvider" portType="tns:RestOutboundPortType" inputVariable="GetWeatherInfoIn" outputVariable="GetWeatherInfoOut"/>
+        <assign name="Assign2">
+            <copy>
+                <from variable="GetWeatherInfoOut" part="part1"/>
+                <to variable="WeatherRequestorOperationOut" part="weatherInfo"/>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="RequestorLink" operation="WeatherRequestorOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/WeatherRESTfulBPEL/src/WeatherRequestor" portType="tns:WeatherRequestorPortType" variable="WeatherRequestorOperationOut"/>
+    </sequence>
+</process>

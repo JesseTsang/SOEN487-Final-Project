@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://service.soen487/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.soen487/">
+
+<xs:element name="JAXBException" type="tns:JAXBException"/>
+
+<xs:element name="URISyntaxException" type="tns:URISyntaxException"/>
+
+<xs:element name="getProductInfo" type="tns:getProductInfo"/>
+
+<xs:element name="getProductInfoResponse" type="tns:getProductInfoResponse"/>
+
+<xs:element name="processPurchaseOrder" type="tns:processPurchaseOrder"/>
+
+<xs:element name="processPurchaseOrderResponse" type="tns:processPurchaseOrderResponse"/>
+
+<xs:element name="product" type="tns:product"/>
+
+<xs:element name="purchaseOrder" type="tns:purchaseOrder"/>
+
+<xs:element name="receivePayment" type="tns:receivePayment"/>
+
+<xs:element name="receivePaymentResponse" type="tns:receivePaymentResponse"/>
+
+<xs:complexType name="getProductInfo">
+<xs:sequence>
+<xs:element name="prodName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductInfoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="product">
+<xs:sequence>
+<xs:element name="manufacturerName" type="xs:string" minOccurs="0"/>
+<xs:element name="productType" type="xs:string" minOccurs="0"/>
+<xs:element name="unitPrice" type="xs:float"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="JAXBException">
+<xs:sequence>
+<xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+<xs:element name="linkedException" type="tns:throwable" minOccurs="0"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="throwable">
+<xs:sequence>
+<xs:element name="stackTrace" type="tns:stackTraceElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="stackTraceElement" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="URISyntaxException">
+<xs:sequence>
+<xs:element name="index" type="xs:int"/>
+<xs:element name="input" type="xs:string" minOccurs="0"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+<xs:element name="reason" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="processPurchaseOrder">
+<xs:sequence>
+<xs:element name="purchaceOrder" type="tns:purchaseOrder" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="purchaseOrder">
+<xs:sequence>
+<xs:element name="orderNum" type="xs:long"/>
+<xs:element name="customerRef" type="xs:string" minOccurs="0"/>
+<xs:element name="product" type="tns:product" minOccurs="0"/>
+<xs:element name="quantity" type="xs:int"/>
+<xs:element name="unitPrice" type="xs:float"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="processPurchaseOrderResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="receivePayment">
+<xs:sequence>
+<xs:element name="orderNum" type="xs:string" minOccurs="0"/>
+<xs:element name="totalPrice" type="xs:float"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="receivePaymentResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

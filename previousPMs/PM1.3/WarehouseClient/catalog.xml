@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/soen487-w18-team07/warehouseService?wsdl" uri="src/conf/xml-resources/web-service-references/warehouseService/wsdl/localhost_8080/soen487-w18-team07/warehouseService.wsdl"/>
+    <system systemId="http://localhost:8080/soen487-w18-team07/warehouseService?xsd=1" uri="src/conf/xml-resources/web-service-references/warehouseService/wsdl/localhost_8080/soen487-w18-team07/warehouseService.xsd_1.xsd"/>
+</catalog>

@@ -1,0 +1,50 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.soen487/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://service.soen487/" name="bepelManufacturerService">
+<types>
+<xsd:schema>
+<xsd:import namespace="http://service.soen487/" schemaLocation="http://localhost:8080/soen487-w18-team07/bepelManufacturerService?xsd=1"/>
+</xsd:schema>
+</types>
+<message name="processPurchaseOrders">
+<part name="parameters" element="tns:processPurchaseOrders"/>
+</message>
+<message name="processPurchaseOrdersResponse">
+<part name="parameters" element="tns:processPurchaseOrdersResponse"/>
+</message>
+<message name="ParseException">
+<part name="fault" element="tns:ParseException"/>
+</message>
+<message name="Exception">
+<part name="fault" element="tns:Exception"/>
+</message>
+<portType name="bepelManufacturerService">
+<operation name="processPurchaseOrders">
+<input wsam:Action="http://service.soen487/bepelManufacturerService/processPurchaseOrdersRequest" message="tns:processPurchaseOrders"/>
+<output wsam:Action="http://service.soen487/bepelManufacturerService/processPurchaseOrdersResponse" message="tns:processPurchaseOrdersResponse"/>
+<fault message="tns:ParseException" name="ParseException" wsam:Action="http://service.soen487/bepelManufacturerService/processPurchaseOrders/Fault/ParseException"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://service.soen487/bepelManufacturerService/processPurchaseOrders/Fault/Exception"/>
+</operation>
+</portType>
+<binding name="bepelManufacturerServicePortBinding" type="tns:bepelManufacturerService">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="processPurchaseOrders">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="ParseException">
+<soap:fault name="ParseException" use="literal"/>
+</fault>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
+</operation>
+</binding>
+<service name="bepelManufacturerService">
+<port name="bepelManufacturerServicePort" binding="tns:bepelManufacturerServicePortBinding">
+<soap:address location="http://localhost:8080/soen487-w18-team07/bepelManufacturerService"/>
+</port>
+</service>
+</definitions>

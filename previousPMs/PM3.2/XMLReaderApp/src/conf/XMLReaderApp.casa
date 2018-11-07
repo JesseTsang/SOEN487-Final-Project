@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://service.soen487/" xmlns:ns2="http://enterprise.netbeans.org/bpel/XMLReaderBPEL/XMLReaderBPEL" xmlns:ns3="http://j2ee.netbeans.org/wsdl/XMLReaderBPEL/src/XMLReaderRequestor" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="ReaderWsPort" interface-name="ns1:ReaderWs" name="endpoint1" service-name="ns1:ReaderWs"/>
+        <endpoint display-name="XMLReaderRequestor" endpoint-name="XMLReaderRequestorPortTypeRole_myRole" file-path="XMLReaderBPEL.bpel" interface-name="ns3:XMLReaderRequestorPortType" name="endpoint2" process-name="XMLReaderBPEL" service-name="ns2:XMLReaderRequestor"/>
+        <endpoint display-name="XMLReader" endpoint-name="ReaderWsRole_partnerRole" file-path="XMLReaderBPEL.bpel" interface-name="ns1:ReaderWs" name="endpoint3" process-name="XMLReaderBPEL" service-name="ns2:XMLReader"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="XMLReaderBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="XMLReaderApp-XMLReaderBPEL" unit-name="XMLReaderBPEL" unknown="false" x="143" y="101">
+            <provides endpoint="endpoint2"/>
+            <consumes endpoint="endpoint3"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="XMLReaderApp-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port x="68" y="41">
+                    <link xlink:href="../jbiServiceUnits/XMLReaderBPEL/XMLReader.wsdl#xpointer(/definitions/service[@name='ReaderWs']/port[@name='ReaderWsPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint3" provider="endpoint1" state="unchanged"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiServiceUnits/XMLReaderBPEL/XMLReader.wsdl#xpointer(/definitions/portType[@name='ReaderWs'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/XMLReaderBPEL/XMLReaderRequestor.wsdl#xpointer(/definitions/portType[@name='XMLReaderRequestorPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiServiceUnits/XMLReaderBPEL/XMLReader.wsdl#xpointer(/definitions/binding[@name='ReaderWsPortBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiServiceUnits/XMLReaderBPEL/XMLReader.wsdl#xpointer(/definitions/service[@name='ReaderWs'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>

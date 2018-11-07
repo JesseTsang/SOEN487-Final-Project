@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+--><catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="product_order.xsd">   
+    <!--warehouse 1-->
+    <product>
+        <productId>1</productId>
+        <warehouseId>1</warehouseId>
+        <manufacturerName>Sony</manufacturerName>
+        <productType>TV</productType>
+        <unitPrice>659.98</unitPrice>
+        <quantity>196</quantity>
+    </product>
+    <product>
+        <productId>2</productId>
+        <warehouseId>1</warehouseId>
+        <manufacturerName>Panasonic</manufacturerName>
+        <productType>Video_Camera</productType>
+        <unitPrice>139.99</unitPrice>
+        <quantity>197</quantity>
+    </product>
+    <product>
+        <productId>3</productId>
+        <warehouseId>1</warehouseId>
+        <manufacturerName>Samsung</manufacturerName>
+        <productType>DVD_Player</productType>
+        <unitPrice>39.99</unitPrice>
+        <quantity>115</quantity>
+    </product>
+    <!--warehouse 2-->
+     <product>
+        <productId>4</productId>
+        <warehouseId>2</warehouseId>
+        <manufacturerName>Sony</manufacturerName>
+        <productType>TV</productType>
+        <unitPrice>659.98</unitPrice>
+        <quantity>196</quantity>
+    </product>
+    <product>
+        <productId>5</productId>
+        <warehouseId>2</warehouseId>
+        <manufacturerName>Panasonic</manufacturerName>
+        <productType>Video_Camera</productType>
+        <unitPrice>139.99</unitPrice>
+        <quantity>67</quantity>
+    </product>
+    <product>
+        <productId>6</productId>
+        <warehouseId>2</warehouseId>
+        <manufacturerName>Samsung</manufacturerName>
+        <productType>DVD_Player</productType>
+        <unitPrice>39.99</unitPrice>
+        <quantity>118</quantity>
+    </product>
+    <!--warehouse 3-->
+     <product>
+        <productId>7</productId>
+        <warehouseId>3</warehouseId>
+        <manufacturerName>Sony</manufacturerName>
+        <productType>TV</productType>
+        <unitPrice>659.98</unitPrice>
+        <quantity>194</quantity>
+    </product>
+    <product>
+        <productId>8</productId>
+        <warehouseId>3</warehouseId>
+        <manufacturerName>Panasonic</manufacturerName>
+        <productType>Video_Camera</productType>
+        <unitPrice>139.99</unitPrice>
+        <quantity>195</quantity>
+    </product>
+    <product>
+        <productId>9</productId>
+        <warehouseId>3</warehouseId>
+        <manufacturerName>Samsung</manufacturerName>
+        <productType>DVD_Player</productType>
+        <unitPrice>39.99</unitPrice>
+        <quantity>54</quantity>
+    </product>
+</catalog>
